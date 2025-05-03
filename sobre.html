@@ -18,7 +18,7 @@
       width: 100vw;
     }
 
-    .webp-firefly {
+    .custom-firefly {
       position: absolute;
       background-image: url('assets/weyv.webp');
       background-size: contain;
@@ -33,71 +33,67 @@
 <body>
 
   <script>
-    const NUM_FIREFLIES = 6;
-    const fireflies = [];
-    const MARGIN = 20; // margen para que salgan un poco
-    const BASE_SPEED = 0.2; // velocidad reducida
+    const FF_COUNT = 6;
+    const ffList = [];
+    const FF_MARGIN = 20;
+    const FF_SPEED = 0.2;
 
-    function createFirefly() {
-      const el = document.createElement('div');
-      el.className = 'webp-firefly';
+    function spawnCustomFirefly() {
+      const node = document.createElement('div');
+      node.className = 'custom-firefly';
 
-      const size = Math.random() * 50 + 80;
-      el.style.width = `${size}px`;
-      el.style.height = `${size}px`;
+      const dimension = Math.random() * 50 + 80;
+      node.style.width = `${dimension}px`;
+      node.style.height = `${dimension}px`;
 
-      const x = Math.random() * (window.innerWidth - size);
-      const y = Math.random() * (window.innerHeight - size);
-      const vx = (Math.random() - 0.5) * BASE_SPEED;
-      const vy = (Math.random() - 0.5) * BASE_SPEED;
+      const posX = Math.random() * (window.innerWidth - dimension);
+      const posY = Math.random() * (window.innerHeight - dimension);
+      const velX = (Math.random() - 0.5) * FF_SPEED;
+      const velY = (Math.random() - 0.5) * FF_SPEED;
 
-      document.body.appendChild(el);
-      fireflies.push({ el, x, y, vx, vy, size, facingRight: vx > 0 });
+      document.body.appendChild(node);
+      ffList.push({ node, posX, posY, velX, velY, dimension, flip: velX > 0 });
     }
 
-    function updateFireflies() {
-      for (let f of fireflies) {
-        f.x += f.vx;
-        f.y += f.vy;
+    function animateCustomFireflies() {
+      for (let ff of ffList) {
+        ff.posX += ff.velX;
+        ff.posY += ff.velY;
 
-        // Rebotar en bordes verticales
-        if (f.y <= 0 || f.y >= window.innerHeight - f.size) {
-          f.vy *= -1;
+        if (ff.posY <= 0 || ff.posY >= window.innerHeight - ff.dimension) {
+          ff.velY *= -1;
         }
 
-        // Rebotar en bordes horizontales con margen
-        if (f.x <= -MARGIN) {
-          f.vx = Math.abs(f.vx);
-          f.facingRight = true;
-        } else if (f.x >= window.innerWidth - f.size + MARGIN) {
-          f.vx = -Math.abs(f.vx);
-          f.facingRight = false;
+        if (ff.posX <= -FF_MARGIN) {
+          ff.velX = Math.abs(ff.velX);
+          ff.flip = true;
+        } else if (ff.posX >= window.innerWidth - ff.dimension + FF_MARGIN) {
+          ff.velX = -Math.abs(ff.velX);
+          ff.flip = false;
         }
 
-        const transform = `translate(${f.x}px, ${f.y}px) scaleX(${f.facingRight ? 1 : -1})`;
-        f.el.style.transform = transform;
+        const move = `translate(${ff.posX}px, ${ff.posY}px) scaleX(${ff.flip ? 1 : -1})`;
+        ff.node.style.transform = move;
       }
 
-      requestAnimationFrame(updateFireflies);
+      requestAnimationFrame(animateCustomFireflies);
     }
 
-    function addImpulse(strength = 0.5) {
-      fireflies.forEach(f => {
-        f.vx += (Math.random() - 0.5) * strength;
-        f.vy += (Math.random() - 0.5) * strength;
+    function pushImpulse(strength = 0.5) {
+      ffList.forEach(ff => {
+        ff.velX += (Math.random() - 0.5) * strength;
+        ff.velY += (Math.random() - 0.5) * strength;
       });
     }
 
-    // Crear luciérnagas
-    for (let i = 0; i < NUM_FIREFLIES; i++) {
-      createFirefly();
+    for (let i = 0; i < FF_COUNT; i++) {
+      spawnCustomFirefly();
     }
 
-    updateFireflies();
+    animateCustomFireflies();
 
-    // Eventos para añadir movimiento
-    window.addEventListener('scroll', () => addImpulse(0.8));
-    window.addEventListener('touchstart', () => addImpulse(1));
+    window.addEventListener('scroll', () => pushImpulse(0.8));
+    window.addEventListener('touchstart', () => pushImpulse(1));
   </script>
 
 </body>

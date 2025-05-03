@@ -30,6 +30,16 @@ g[id^="BudGroup"] g[id^="BudGroup"] g[id^="Bud"],
   visibility: hidden;
 }
 
+/* Ocultar barra de desplazamiento en todos los navegadores */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Para Firefox */
+html {
+  scrollbar-width: none;
+}
+
 body,
 html {
   height: 100%;
@@ -46,6 +56,13 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  max-width: 625px;
+  margin: auto;
+}
+
+#jireh {
+  font-size: 4em;
+  margin-block: 55px;
 }
 /* Marco fijo PNG */
 .frame {

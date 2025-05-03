@@ -15,10 +15,10 @@
 
     <!-- Open Graph Meta -->
     <meta property="og:title" content="Mis XV Jireh">
-    <meta property="og:description" content="¡Te invitamos a celebrar con nosotros!">
-    <meta property="og:image" content="ring.png">
+    <meta property="og:description" content="¡Te invito a celebrar mis XV!">
+    <meta property="og:image" content="https://giftclick.github.io/XV/ring.jpg">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://giftclick.github.io/XV/">
+    <meta property="og:url" content="https://giftclick.github.io/XV/index.html">
 </head>
 
 <body>
@@ -145,26 +145,53 @@
     <div id="content">
 
         <section class="section">
-            <h1 class="title reveal">XV Jireh</h1>
-            <p class="subtitle reveal-left"> ¡Mis quinceaños!</p>
+            <h1 class="subtitle reveal" id="jireh">XV Jireh</h1>
+            <p class="title reveal-left"> ¡Mis quinceaños!</p>
             <p class="subtitle reveal-left">TU PRESENCIA ES ALTAMENTE APRECIADA EN ESTE MOMENTO TAN ESPECIAL.</p>
+            <p class="subtitle reveal-left" style="margin-bottom: 0px;">31 de mayo, 2025.</p>
+            <div id="countdown" class="subtitle reveal-left"></div>
+            <script>
+                function updateCountdown() {
+                    const targetDate = new Date("may 31, 2025 19:00:00").getTime();
+                    const now = new Date().getTime();
+                    const difference = targetDate - now;
+
+                    if (difference <= 0) {
+                        document.getElementById("countdown").innerHTML = "¡Ya comenzó la celebración!";
+                        return;
+                    }
+
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    document.getElementById("countdown").innerHTML =
+                        `${days} días ${hours}h ${minutes}m ${seconds}s`;
+                }
+
+                updateCountdown(); // Ejecuta al cargar
+                setInterval(updateCountdown, 1000); // Actualiza cada segundo
+            </script>
+
             <img src="assets/1.png" alt="Pareja tomados de la mano" class="quote-image fra image-reveal" id="BW" />
             <div id="countdown" class="subtitle reveal-left"></div>
         </section>
 
         <div class="card">
-            <h1 class="title">Mis 15 Años</h1>
-            <p class="subtitle"><span class="highlight subtitle">Llegar a los 15 años</span> es una etapa importante
+            <h1 class="title reveal">Mis 15 Años</h1>
+            <p class="subtitle reveal-left"><span class="highlight subtitle">Llegar a los 15 años</span> es una etapa
+                importante
                 para mí, donde quiero
                 compartir con las personas que han estado presentes en mi vida, que me conocen, me apoyan y forman
                 parte
                 de lo que soy.</p>
-            <p class="subtitle">Quiero que este día sea especial, no por lo que representa, sino por la gente que
+            <p class="subtitle reveal-left">Quiero que este día sea especial, no por lo que representa, sino por la
+                gente que
                 estará a mi lado,
-                por
-                eso me encantaría que me acompañes. <span class="highlight">Que estés ahí</span>, para disfrutar el
+                por eso, me encantaría que me acompañes, <span class="highlight">que estés ahí</span> para disfrutar el
                 momento, reírnos juntos y crear un recuerdo que valga la pena.</p>
-            <p class="footer text">Te espero para que formes parte de esta noche.<br>Nos vemos pronto.</p>
+            <p class="footer text image-reveal">Te espero para que formes parte de esta noche.<br>Nos vemos pronto.</p>
             <img src="assets/lu.png" alt="Pareja tomados de la mano" id="lu" class="quote-image fra image-reveal"
                 id="BW" />
         </div>
@@ -172,7 +199,7 @@
         <img src="./assets/perlas.png" alt="Rosa decorativa" id="di" class="decorative-rose reveal" />
         <section class="section">
             <h1 class="title reveal">Padres</h1>
-            <p class="subtitle reveal-left">Reinaldo<br>Cáceres<br><br>Nancy<br>Mayon</p>
+            <p class="subtitle reveal-left">Reinaldo<br>Cáceres<br>Espinoza <br><br>Nancy<br>Mayon<br>Lozano</p>
         </section>
         <img src="./assets/2.png" alt="Rosa decorativa" class="decorative-rose reveal" />
         <section class="section">
@@ -181,7 +208,7 @@
         </section>
         <section class="section">
             <h1 class="title reveal">Celebración</h1>
-            <p class="subtitle reveal-left">04:00 PM</p>
+            <p class="subtitle reveal-left">07:00 PM</p>
             <p class="text">La celebración se llevará a cabo el sábado 31 de mayo de 2025 a las 19:00 en la dirección
                 Av.
                 Hilda 540, Chaclacayo, ubicada en la espalda del colegio Saco Oliveros como referencia.
@@ -239,7 +266,7 @@
                             </g>
                         </svg>
                     </div>
-                    <p class="rol reveal"><strong>DAMAS:</strong><br>VESTIDO LARGO<br><small>(NO VERDE<br>O
+                    <p class="rol reveal"><strong>DAMAS:</strong><br>VESTIDO O SASTRE<br><small>(NO VERDE<br>O
                             SIMILARES)</small></p>
                 </div>
                 <div class="item reveal-left">
@@ -674,9 +701,8 @@
         <br>
         <p class="footnumber">Invitaciones virtuales <br> <br>+51 967707229</p>
     </footer>
-
-
-
+    <div id="contenedor-luciernagas" style="position: relative; width: 100%; height: 100vh; background-color: black;">
+    </div>
     </div>
 
 
@@ -703,6 +729,379 @@
         observer.observe(el);
     });
 </script>
+<script>
+    function iniciarLuciernagasEnDiv(containerId, cantidad = 6) {
+        const contenedor = document.getElementById(containerId);
+        if (!contenedor) return;
 
+        const ffConfig = {
+            cantidad,
+            margen: 20,
+            velocidad: 0.2,
+            elementos: [],
+        };
+
+        // Estilos encapsulados
+        const estilo = document.createElement('style');
+        estilo.textContent = `
+        #${containerId} .ff-luz {
+          position: absolute;
+          background-image: url('assets/weyv.webp');
+          background-size: contain;
+          background-repeat: no-repeat;
+          pointer-events: none;
+          opacity: 0.9;
+          will-change: transform;
+          transition: transform 0.2s linear;
+          z-index: 5000;
+        }
+      `;
+        document.head.appendChild(estilo);
+
+        function crearLuz() {
+            const el = document.createElement('div');
+            el.className = 'ff-luz';
+
+            const tamaño = Math.random() * 50 + 80;
+            el.style.width = `${tamaño}px`;
+            el.style.height = `${tamaño}px`;
+
+            const x = Math.random() * (contenedor.clientWidth - tamaño);
+            const y = Math.random() * (contenedor.clientHeight - tamaño);
+            const vx = (Math.random() - 0.5) * ffConfig.velocidad;
+            const vy = (Math.random() - 0.5) * ffConfig.velocidad;
+
+            contenedor.appendChild(el);
+            ffConfig.elementos.push({ el, x, y, vx, vy, tamaño, derecha: vx > 0 });
+        }
+
+        function animarLuces() {
+            for (let f of ffConfig.elementos) {
+                f.x += f.vx;
+                f.y += f.vy;
+
+                if (f.y <= 0 || f.y >= contenedor.clientHeight - f.tamaño) {
+                    f.vy *= -1;
+                }
+
+                if (f.x <= -ffConfig.margen) {
+                    f.vx = Math.abs(f.vx);
+                    f.derecha = true;
+                } else if (f.x >= contenedor.clientWidth - f.tamaño + ffConfig.margen) {
+                    f.vx = -Math.abs(f.vx);
+                    f.derecha = false;
+                }
+
+                const transformacion = `translate(${f.x}px, ${f.y}px) scaleX(${f.derecha ? 1 : -1})`;
+                f.el.style.transform = transformacion;
+            }
+
+            requestAnimationFrame(animarLuces);
+        }
+
+        function impulso(extra = 0.5) {
+            ffConfig.elementos.forEach(f => {
+                f.vx += (Math.random() - 0.5) * extra;
+                f.vy += (Math.random() - 0.5) * extra;
+            });
+        }
+
+        for (let i = 0; i < ffConfig.cantidad; i++) {
+            crearLuz();
+        }
+
+        animarLuces();
+
+        // Eventos locales al contenedor
+        contenedor.addEventListener('mouseenter', () => impulso(0.8));
+        contenedor.addEventListener('touchstart', () => impulso(1));
+    }
+</script>
+<script>
+    iniciarLuciernagasEnDiv('contenedor-luciernagas', 6);
+</script>
+<div id="music-player-bar">
+    <div id="player-content">
+        <div id="track-info">
+            <div id="track-title">Mi Canción</div>
+            <div id="track-controls">
+                <button id="play-btn" style="padding-right: -8px !important;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </button>
+                <button id="pause-btn" style="padding-right: 5px !important;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none">
+                        <line x1="10" y1="4" x2="10" y2="20"></line>
+                        <line x1="18" y1="4" x2="18" y2="20"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="progress-container">
+            <div id="progress-bar">
+                <div id="progress-current"></div>
+            </div>
+            <div id="time-display">00:00</div>
+        </div>
+    </div>
+</div>
+<style>
+    #music-player-bar {
+
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 95%;
+        background: rgba(13, 12, 59, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        padding: 7px 0px;
+        z-index: 1000;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        border-radius: 40px;
+        margin: 3%;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    #player-content {
+        max-width: 800px;
+        margin: 5px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0 40px;
+    }
+
+    #track-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #track-title {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        position: relative;
+        padding-left: 28px;
+    }
+
+    #track-title::before {
+        content: "♪";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        color: #ffffff;
+    }
+
+    #track-controls {
+        display: flex;
+        align-items: center;
+        margin-right: 2px;
+    }
+
+    #play-btn,
+    #pause-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+        stroke-width: 1.5;
+    }
+
+    #play-btn:hover,
+    #pause-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    #play-btn svg,
+    #pause-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Invertimos la visualización inicial */
+    #play-btn {
+        display: none;
+    }
+
+    #pause-btn {
+        display: flex;
+    }
+
+    #progress-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    #progress-bar {
+        flex-grow: 1;
+        height: 4px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    #progress-current {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 0%;
+        background-color: #ffffff;
+        border-radius: 2px;
+        transition: width 0.1s linear;
+    }
+
+    #time-display {
+        font-size: 14px;
+        font-weight: 300;
+        min-width: 50px;
+        text-align: center;
+    }
+
+    @media (min-width: 768px) {
+        #player-content {
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        #track-info {
+            width: 40%;
+        }
+
+        #progress-container {
+            width: 60%;
+        }
+    }
+</style>
+<script>
+    // Crear el elemento de audio
+    const audioPlayer = new Audio('./assets/music.mp3');
+    // Configurar para autoplay
+    audioPlayer.autoplay = true;
+    let isPlaying = true;
+
+    // Función para iniciar la reproducción automáticamente
+    function initPlayer() {
+        // Intentar reproducir automáticamente
+        audioPlayer.play().then(() => {
+            // Si se reproduce con éxito
+            isPlaying = true;
+            document.getElementById('play-btn').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'flex';
+            updateProgress();
+        }).catch(error => {
+            // Si falla el autoplay (políticas de navegador)
+            console.log("Autoplay prevented:", error);
+            isPlaying = false;
+            document.getElementById('play-btn').style.display = 'flex';
+            document.getElementById('pause-btn').style.display = 'none';
+        });
+    }
+
+    // Iniciar cuando la página se carga
+    window.addEventListener('load', initPlayer);
+
+    document.getElementById('play-btn').addEventListener('click', function () {
+        // Reproducir la canción
+        audioPlayer.play();
+        isPlaying = true;
+        document.getElementById('play-btn').style.display = 'none';
+        document.getElementById('pause-btn').style.display = 'flex';
+
+        // Iniciar actualización de progreso
+        updateProgress();
+    });
+
+    document.getElementById('pause-btn').addEventListener('click', function () {
+        // Pausar la canción
+        audioPlayer.pause();
+        isPlaying = false;
+        document.getElementById('pause-btn').style.display = 'none';
+        document.getElementById('play-btn').style.display = 'flex';
+    });
+
+    // Actualizar la barra de progreso y el tiempo
+    function updateProgress() {
+        if (isPlaying) {
+            const progressBar = document.getElementById('progress-current');
+            const timeDisplay = document.getElementById('time-display');
+
+            // Actualizar cada 100ms
+            const progressInterval = setInterval(function () {
+                if (!isPlaying) {
+                    clearInterval(progressInterval);
+                    return;
+                }
+
+                // Calcular porcentaje de progreso
+                const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                progressBar.style.width = percentage + '%';
+
+                // Formatear y mostrar tiempo
+                const minutes = Math.floor(audioPlayer.currentTime / 60);
+                const seconds = Math.floor(audioPlayer.currentTime % 60);
+                timeDisplay.textContent =
+                    (minutes < 10 ? '0' + minutes : minutes) + ':' +
+                    (seconds < 10 ? '0' + seconds : seconds);
+
+                // Si termina la canción
+                if (audioPlayer.ended) {
+                    // Al terminar, empezar de nuevo
+                    audioPlayer.currentTime = 0;
+                    audioPlayer.play();
+                }
+            }, 100);
+        }
+    }
+
+    // Permitir clic en la barra de progreso
+    document.getElementById('progress-bar').addEventListener('click', function (e) {
+        const progressBar = document.getElementById('progress-bar');
+        const rect = progressBar.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const width = rect.width;
+        const percentage = (x / width);
+
+        // Actualizar posición de reproducción
+        audioPlayer.currentTime = percentage * audioPlayer.duration;
+
+        // Actualizar visualmente
+        document.getElementById('progress-current').style.width = (percentage * 100) + '%';
+
+        // Actualizar tiempo
+        const minutes = Math.floor(audioPlayer.currentTime / 60);
+        const seconds = Math.floor(audioPlayer.currentTime % 60);
+        document.getElementById('time-display').textContent =
+            (minutes < 10 ? '0' + minutes : minutes) + ':' +
+            (seconds < 10 ? '0' + seconds : seconds);
+    });
+
+    // Actualizar cuando la canción se carga
+    audioPlayer.addEventListener('loadedmetadata', function () {
+        const minutes = Math.floor(audioPlayer.duration / 60);
+        const seconds = Math.floor(audioPlayer.duration % 60);
+        document.getElementById('time-display').textContent =
+            (minutes < 10 ? '0' + minutes : minutes) + ':' +
+            (seconds < 10 ? '0' + seconds : seconds);
+    });
+</script>
 
 </html>
